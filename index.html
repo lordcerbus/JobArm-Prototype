@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobArm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login" class="container">
+        <h2>JOBARM</h2>
+        <input id="idLogin" type="text" placeholder="ID">
+        <input id="senhaLogin" type="password" placeholder="Senha">
+        <button id="confirmarLogin">Confirmar</button>
+        <p id="alertL"></p>
+    </div>
+
+    <div id="register" class="container hidden">
+        <h2>JOBARM</h2>
+        <input id="idCadastro" type="text" placeholder="ID">
+        <input id="senhaCadastro" type="password" placeholder="Senha">
+        <input id="nomeCadastro" type="text" placeholder="Nome">
+        <input id="nascimentoCadastro" type="text" placeholder="Data de Nascimento">
+        <input id="admissaoCadastro" type="text" placeholder="Data de Admissao">
+        <button id='confirmarCadastro'>Confirmar</button>
+        <p id="alertR"></p>
+    </div>
+
+    <div id="main" class="container hidden">
+        <p id="idUsuario" style="text-align: left;">ID: XXXXXXX</p>
+        <p id="nomeUsuario">Nome: XXXXXXX</p>
+        <p id="admissao">Data de Admissão: XX/XX/XXXX</p>
+        <p id="nascimento">Data de Nascimento: XX/XX/XXXX</p>
+        <label><strong>Letra:</strong>
+            <select onchange="updateCalendar(this.value)">
+                <script>
+                    for (let i = 65; i <= 90; i++) {
+                        document.write(`<option value="${String.fromCharCode(i)}">${String.fromCharCode(i)}</option>`);
+                    }
+                </script>
+            </select>
+        </label>
+
+        <div id="calendar-container" class="calendar-container">
+            <div class="calendar-wrapper">
+                <div id="calendar" class="calendar"></div>
+            </div>
+        </div>
+        <button onclick="sendNotification('Teste', 'Isso é um teste de notificação!')">
+          Testar Notificação
+        </button>
+
+        <div id="status"></div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

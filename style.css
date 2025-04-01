@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: auto;
+}
+.container {
+    position: relative;
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+#login, #register {
+    width: 80%; /* Garantir que o container ocupe toda a largura do seu container pai */
+    margin: 0 auto; /* Centralizar horizontalmente */
+    position: absolute;
+    top: 50%; /* Colocar no meio da tela */
+    left: 50%; /* Colocar no meio da tela */
+    transform: translate(-50%, -50%); /* Ajustar para centralizar corretamente */
+}
+input, button, select {
+    width: 90%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+button {
+    background: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+a {
+    color: #00FFFF;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+}
+.hidden {
+    display: none;
+}
+#calendar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+.calendar-wrapper {
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+    grid-template-rows: repeat(5, 1fr);
+    margin-bottom: 10px;
+}
+.day {
+    background-color: black;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 25px;
+    text-align: center;
+}
+.shift {
+    font-size: 1em;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 2px;
+}
+.shift.F {
+  background: white;
+}
+.shift.T1 {
+  background: slategrey;
+}
+.shift.T2 {
+  background: cyan;
+}
+.shift.T3 {
+  background: orange;
+}
+.calendar .day:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+#status {
+    margin-top: 20px;
+    color: #FFD700;
+}
+#today {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+/*#login, #register {
+  display:none;
+}*/
