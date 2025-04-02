@@ -30,26 +30,32 @@ function register() {
     let nome = document.querySelector('#nomeCadastro').value.trim();
     let nascimento = document.querySelector('#nascimentoCadastro').value.trim();
     let admissao = document.querySelector('#admissaoCadastro').value.trim();
-    console.log(nascimento)
-    console.log(admissao)
+
     let db = loadJson();
 
     if (id === '' || senha === '' || nome === '') {
-        document.querySelector('#alertR').innerHTML = 'Existem campos vazios';
+        showNotification('notificationRegister', 'Existem campos vazios');
         return;
     }
     
     if (db.funcionarios.some(f => f.id === id)) {
-        document.querySelector('#alertR').innerHTML = 'ID já cadastrado';
+        showNotification('notificationRegister', 'ID já cadastrado');
         return;
     }
     
-    let novoFuncionario = { id, senha, nome, nascimento, admissao}
+    let novoFuncionario = { id, senha, nome, nascimento, admissao };
     db.funcionarios.push(novoFuncionario);
     saveJson(db);
-    goTo('login');
-    document.querySelector('#alertL').innerHTML ='';
+
+    // Exibe a notificação na tela de registro
+    showNotification('notificationRegister', 'CADASTRO REALIZADO COM SUCESSO');
+
+    // Redireciona para login após 2 segundos
+    setTimeout(() => {
+        goTo('login');
+    }, 2000);
 }
+
 
 // Login de usuário
 function login() {
@@ -57,43 +63,47 @@ function login() {
     let senha = document.querySelector('#senhaLogin').value.trim();
     let db = loadJson();
 
+    if (id === '0000' && senha === '0000') {
+        goTo('register');
+        return;
+    }
+
     let usuario = db.funcionarios.find(f => f.id === id && f.senha === senha);
 
     if (usuario) {
         document.querySelector('#idUsuario').innerHTML = `ID: ${usuario.id}`;
         document.querySelector('#nomeUsuario').innerHTML = `Nome: ${usuario.nome}`;
-        document.querySelector('#admissao').innerHTML = `Data de Admissao: ${usuario.admissao}`;
+        document.querySelector('#admissao').innerHTML = `Data de Admissão: ${usuario.admissao}`;
         document.querySelector('#nascimento').innerHTML = `Data de Nascimento: ${usuario.nascimento}`;
         goTo('main');
+        updateCalendar(document.querySelector("select").value);
     } else {
         document.querySelector('#alertL').innerHTML = 'ID ou Senha incorretos, ou campos vazios';
     }
-    if (id === '0000' && senha === '0000'){
-          goTo('register')
-    }
 }
 
-// Eventos dos botões
-document.querySelector('#confirmarLogin').addEventListener('click', login);
-document.querySelector('#confirmarCadastro').addEventListener('click', register);
+// Formatação automática de data
+document.querySelectorAll('#nascimentoCadastro, #admissaoCadastro').forEach(input => {
+    input.addEventListener('input', function () {
+        let value = this.value.replace(/\D/g, '').slice(0, 8);
+        if (value.length >= 4) value = value.replace(/^(\d{2})(\d{2})(\d{0,4})$/, "$1/$2/$3");
+        else if (value.length >= 2) value = value.replace(/^(\d{2})(\d{0,2})$/, "$1/$2");
+        this.value = value;
+    });
+});
 
-// Função para gerar a escala aleatória de A-Z
-function getRandomScaleLetter() {
-    return String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Letra A-Z
-}
-
-// Função para gerar o calendário com base na letra e no mês
+// Função para gerar o calendário adaptado ao mês atual
 function generateCalendar(letter) {
     const today = new Date();
     const currentMonth = today.getMonth();
     const daysInMonth = new Date(today.getFullYear(), currentMonth + 1, 0).getDate();
     let days = [];
-    let letterOffset = letter.charCodeAt(0) - 65; // Define o índice da letra
+    let letterOffset = letter.charCodeAt(0) - 65;
 
     for (let i = 1; i <= daysInMonth; i++) {
         let shiftIndex = (i + letterOffset - 1) % shiftCycle.length;
         let dayClass = shiftCycle[shiftIndex];
-        let isToday = (i === today.getDate()) ? 'today' : ''; // Destaque do dia atual
+        let isToday = (i === today.getDate()) ? 'today' : '';
 
         days.push(`
             <div class="day ${isToday}">
@@ -107,34 +117,30 @@ function generateCalendar(letter) {
     updateStatus(today, letter);
 }
 
-// Função para verificar permissão e enviar notificação
-function sendNotification(title, message) {
-    // Verifica se o navegador suporta notificações
-    if (!("Notification" in window)) {
-        alert("Seu navegador não suporta notificações. " + message);
-        return;
-    }
+// Mostra o status da escala
+function showNotification(elementId, message) {
+    const notificationBox = document.getElementById(elementId);
+    const notificationText = notificationBox.querySelector('p');
 
-    // Verifica a permissão do usuário
-    if (Notification.permission === "granted") {
-        new Notification(title, { body: message });
-    } else if (Notification.permission !== "denied") {
-        // Pede permissão ao usuário
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                new Notification(title, { body: message });
-            } else {
-                alert("Permissão negada! " + message);
-            }
-        });
-    } else {
-        // Caso o usuário já tenha negado antes
-        alert("Você bloqueou as notificações. " + message);
-    }
+    notificationText.innerHTML = message;
+    notificationBox.style.display = 'block';
+
+    // Animação para aparecer
+    setTimeout(() => {
+        notificationBox.style.opacity = '1';
+    }, 100);
+
+    // Esconde a notificação após 5 segundos
+    setTimeout(() => {
+        notificationBox.style.opacity = '0';
+        setTimeout(() => {
+            notificationBox.style.display = 'none';
+        }, 500);
+    }, 5000);
 }
 
 
-// Atualiza o status da escala e informa a próxima mudança
+// Modifique a função updateStatus para usar a notificação visual
 function updateStatus(today, letter) {
     const currentDate = today.getDate();
     const dayOfCycle = (currentDate - 1 + (letter.charCodeAt(0) - 65)) % shiftCycle.length;
@@ -153,10 +159,11 @@ function updateStatus(today, letter) {
     } else {
         statusText += `Próximo turno: ${nextShift} no dia ${nextShiftDay} às ${nextShiftTime}`;
     }
-    
-    document.getElementById('status').innerHTML = statusText;
 
-    // Enviar notificação sobre o próximo turno
+    document.getElementById('status').innerHTML = statusText;
+    
+    // Chamar a função de notificação visual
+    showNotification('notificationMain',statusText);
 }
 
 // Retorna o horário de cada turno
@@ -164,19 +171,15 @@ function getShiftTime(shift) {
     if (shift === 'T1') return '06:30';
     if (shift === 'T2') return '14:30';
     if (shift === 'T3') return '22:30';
-    if (shift === 'F') return '00:00'
+    if (shift === 'F') return '00:00';
     return '';
 }
 
-// Atualiza o calendário e status ao trocar de letra
+// Atualiza o calendário ao trocar de letra
 function updateCalendar(letter) {
     generateCalendar(letter);
 }
 
-// Inicializa com a letra A
-generateCalendar('A');
-
-// document.querySelector('#main').classList.remove('hidden')
 
 // Controla a navegação entre as telas
 function goTo(screen) {
@@ -184,10 +187,22 @@ function goTo(screen) {
     document.getElementById('register').classList.add('hidden');
     document.getElementById('main').classList.add('hidden');
     document.getElementById(screen).classList.remove('hidden');
+
+    if (screen === 'main') {
+        updateCalendar(document.querySelector("select").value);
+    }
 }
 
-function disparaNotificacao(screen) {
-  if (screen === 'main') {
-    sendNotification("Atualização da Escala", statusText);
-  }
+// Funcao de retorno a tela de login
+function reset (){
+    document.querySelector('#idLogin').value = ''
+    document.querySelector('#senhaLogin').value = ''
+    goTo('login')
 }
+
+
+// Escopo de eventos dos botões
+document.querySelector('#confirmarLogin').addEventListener('click', login);
+document.querySelector('#confirmarCadastro').addEventListener('click', register);
+document.getElementById('logoutButton').addEventListener('click',reset);
+document.getElementById('logoutButtonM').addEventListener('click',reset);

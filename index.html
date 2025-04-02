@@ -16,6 +16,7 @@
     </div>
 
     <div id="register" class="container hidden">
+      <button id="logoutButton" class="logout-button">X</button>
         <h2>JOBARM</h2>
         <input id="idCadastro" type="text" placeholder="ID">
         <input id="senhaCadastro" type="password" placeholder="Senha">
@@ -23,10 +24,18 @@
         <input id="nascimentoCadastro" type="text" placeholder="Data de Nascimento">
         <input id="admissaoCadastro" type="text" placeholder="Data de Admissao">
         <button id='confirmarCadastro'>Confirmar</button>
+        <div id="notificationRegister" class="notification-box hidden">
+    <strong>NOTIFICAÇÃO</strong>
+    <p id="notificationTextRegister"></p>
+</div>
+
+</div>
+
         <p id="alertR"></p>
     </div>
 
     <div id="main" class="container hidden">
+        <button id="logoutButtonM" class="logout-button">X</button>
         <p id="idUsuario" style="text-align: left;">ID: XXXXXXX</p>
         <p id="nomeUsuario">Nome: XXXXXXX</p>
         <p id="admissao">Data de Admissão: XX/XX/XXXX</p>
@@ -46,11 +55,11 @@
                 <div id="calendar" class="calendar"></div>
             </div>
         </div>
-        <button onclick="sendNotification('Teste', 'Isso é um teste de notificação!')">
-          Testar Notificação
-        </button>
-
-        <div id="status"></div>
+        <div id="notificationMain" class="notification-box hidden">
+    <strong>NOTIFICAÇÃO</strong>
+    <p id="notificationTextMain"></p>
+</div>
+      <div id="status"></div>
     </div>
 
     <script src="main.js"></script>
