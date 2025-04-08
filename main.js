@@ -197,6 +197,7 @@ function goTo(screen) {
 function reset (){
     document.querySelector('#idLogin').value = ''
     document.querySelector('#senhaLogin').value = ''
+    document.querySelector('#alertL').value = ''
     goTo('login')
 }
 
