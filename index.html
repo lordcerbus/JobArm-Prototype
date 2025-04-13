@@ -14,7 +14,6 @@
         <button id="confirmarLogin">Confirmar</button>
         <p id="alertL"></p>
     </div>
-
     <div id="register" class="container hidden">
       <button id="logoutButton" class="logout-button">X</button>
         <h2>JOBARM</h2>
@@ -25,15 +24,16 @@
         <input id="admissaoCadastro" type="text" placeholder="Data de Admissao">
         <button id='confirmarCadastro'>Confirmar</button>
         <div id="notificationRegister" class="notification-box hidden">
-    <strong>NOTIFICAÇÃO</strong>
-    <p id="notificationTextRegister"></p>
-</div>
-
-</div>
-
-        <p id="alertR"></p>
+          <strong>NOTIFICAÇÃO</strong>
+          <p id="notificationTextRegister"></p>
+        </div>
+        <div id="deletar" class="container">
+          <h4>Delete ID</h4>
+          <input type="text" name="deleteUser" id="deleteUser" placeholder="ID">
+          <button id="buttonDelete" type="submit">Delete</button>
+        </div>
     </div>
-
+        <p id="alertR"></p>
     <div id="main" class="container hidden">
         <button id="logoutButtonM" class="logout-button">X</button>
         <p id="idUsuario" style="text-align: left;">ID: XXXXXXX</p>
@@ -41,27 +41,39 @@
         <p id="admissao">Data de Admissão: XX/XX/XXXX</p>
         <p id="nascimento">Data de Nascimento: XX/XX/XXXX</p>
         <label><strong>Letra:</strong>
-            <select onchange="updateCalendar(this.value)">
+            <select id="selectLetra">
                 <script>
-                    for (let i = 65; i <= 90; i++) {
+                    for(let i = 65; i <= 90; i++) {
                         document.write(`<option value="${String.fromCharCode(i)}">${String.fromCharCode(i)}</option>`);
                     }
                 </script>
             </select>
         </label>
-
+        <label><strong>Escala:</strong>
+            <select id="selectEscala">
+                <option value="6x2">6x2</option>
+                <option value="6x3">6x3</option>
+                <option value="5x2">5x2</option>
+                <option value="6x1">6x1</option>
+                <option value="6x1/5x2">6x1/5x2</option>
+                <option value="15x15">15x15</option>
+            </select>
+        </label>
         <div id="calendar-container" class="calendar-container">
             <div class="calendar-wrapper">
+                <div id='navigator'>
+                    <button id="prevMonth"><</button>
+                    <button id="nextMonth">></button>
+                </div>
                 <div id="calendar" class="calendar"></div>
             </div>
         </div>
         <div id="notificationMain" class="notification-box hidden">
-    <strong>NOTIFICAÇÃO</strong>
-    <p id="notificationTextMain"></p>
-</div>
-      <div id="status"></div>
+        <strong>NOTIFICAÇÃO</strong>
+            <p id="notificationTextMain"></p>
+        </div>
+        <button id="showNotification">🔔</button>
     </div>
-
     <script src="main.js"></script>
 </body>
 </html>
