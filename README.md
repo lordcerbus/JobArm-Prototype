@@ -32,5 +32,3 @@ Abra um Pull Request
 
 📄 Licença
 Este projeto está sob a licença MIT - veja o arquivo LICENSE para detalhes.
-
-"Simplificando a gestão de escalas, um turno de cada vez." ⏰👨‍💼👩‍💼
