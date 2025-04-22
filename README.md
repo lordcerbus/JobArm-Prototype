@@ -19,16 +19,7 @@ JobArm é um aplicativo móvel desenvolvido para facilitar a gestão e notifica�
 Frontend: Javascript
 
 
-🚀 Como Contribuir
-Faça um fork do projeto
-
-Crie uma branch para sua feature (git checkout -b feature/awesome-feature)
-
-Commit suas mudanças (git commit -m 'Add some awesome feature')
-
-Push para a branch (git push origin feature/awesome-feature)
-
-Abra um Pull Request
-
 📄 Licença
 Este projeto está sob a licença MIT - veja o arquivo LICENSE para detalhes.
+
+https://lordcerbus.github.io/JobArm-Prototype/
