@@ -19,7 +19,5 @@ JobArm é um aplicativo móvel desenvolvido para facilitar a gestão e notifica�
 Frontend: Javascript
 
 
-📄 Licença
-Este projeto está sob a licença MIT - veja o arquivo LICENSE para detalhes.
 
 https://lordcerbus.github.io/JobArm-Prototype/
