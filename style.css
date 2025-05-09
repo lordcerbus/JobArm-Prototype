@@ -31,7 +31,7 @@ body {
     box-sizing: border-box;
     position: fixed;
     top: 92%;
-    left: 240%;
+    left: 90%;
     cursor: pointer;
 }
 #login, #register {
