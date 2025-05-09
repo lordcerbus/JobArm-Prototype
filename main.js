@@ -375,3 +375,8 @@ document.getElementById('selectEscala').addEventListener('change', generateCalen
   document.getElementById('logoutButtonM').addEventListener('click',reset);
   document.querySelector('#buttonDelete').addEventListener('click',deletefuncionario);
 
+  // Evento do botao de exibir notificacao
+  document.querySelector('#showNotification').addEventListener('click',() => {
+      alert('Essa e uma simulação de notificação')
+  })
+
