@@ -22,5 +22,7 @@ Frontend: Javascript
 
 Confira o design original no [Figma](https://www.figma.com/design/cWLrAHoKVkD3kAspjBVD1K/JobarmPrototype?m=auto&t=G6pBAf1say4a8UM3-6).
 
+![Design](https://raw.githubusercontent.com/lordcerbus/JobArm-Prototype/refs/heads/main/JobArm.png)
+
 
 https://lordcerbus.github.io/JobArm-Prototype/
