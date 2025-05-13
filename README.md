@@ -18,6 +18,9 @@ JobArm é um aplicativo móvel desenvolvido para facilitar a gestão e notifica�
 🛠 Tecnologias Utilizadas
 Frontend: Javascript
 
+## 🎨 Design no Figma
+
+Confira o design original no [Figma](https://www.figma.com/design/cWLrAHoKVkD3kAspjBVD1K/JobarmPrototype?m=auto&t=G6pBAf1say4a8UM3-6).
 
 
 https://lordcerbus.github.io/JobArm-Prototype/
